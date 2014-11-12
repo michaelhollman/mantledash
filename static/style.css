@@ -4,7 +4,21 @@ body {
 }
 
 #bgvid {
-	position: absolute;
-	z-index: -100;
-  width: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+
+  top: 50%;
+  left: 50%;
+
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
 }
