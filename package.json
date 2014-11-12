@@ -1,0 +1,11 @@
+{
+  "name": "mantledash",
+  "version": "1.0.0",
+  "description": "A fireside dashboard.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Hollman (@michaelhollman)",
+  "license": "MIT"
+}
