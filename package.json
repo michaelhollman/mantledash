@@ -1,11 +1,23 @@
 {
   "name": "mantledash",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A fireside dashboard.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "~4.9.x",
+    "body-parser": "1.9.0"
+  },
+  "engines": {
+      "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelhollman/mantledash"
   },
   "author": "Michael Hollman (@michaelhollman)",
-  "license": "MIT"
+  "license": "MIT",
+  "readme": "README.md"
 }
