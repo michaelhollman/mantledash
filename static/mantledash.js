@@ -59,13 +59,17 @@ $(function() {
     sweet.timer = sweet.timer || 30000;
     sweet.allowOutsideClick = true;
 
-    sweet.title = sweet.title
+    if (sweet.title) {
+      sweet.title = sweet.title
       .replace('{rand_branch}', getRandomBranchName())
       .replace('{rand_number}', getRandomBetween(10, 9000));
+    }
 
-    sweet.text = sweet.text
+    if (sweet.text) {
+      sweet.text = sweet.text
       .replace('{rand_branch}', getRandomBranchName())
       .replace('{rand_number}', getRandomBetween(10, 9000));
+    }
 
     return sweet;
   }
