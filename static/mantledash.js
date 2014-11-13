@@ -56,7 +56,7 @@ $(function() {
     ];
 
     var sweet = alerts[Math.floor(Math.random()*alerts.length)];
-    sweet.timer = sweet.timer || 20000;
+    sweet.timer = sweet.timer || 30000;
     sweet.allowOutsideClick = true;
 
     sweet.title = sweet.title
@@ -76,7 +76,7 @@ $(function() {
 
   function displayRandomStatus() {
     sweetAlert(getRandomSweetAlert());
-    setTimeout(displayRandomStatus, getRandomBetween(4 * 60 * 1000, 8 * 60 * 1000));
+    setTimeout(displayRandomStatus, getRandomBetween(3 * 60 * 1000, 5 * 60 * 1000));
   }
 
   sweetAlertInitialize();
