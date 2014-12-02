@@ -52,6 +52,18 @@ $(function() {
         title: 'Culture approaching maximum levels',
         text: 'You literally couldn\'t get much more awesome',
         type: 'success'
+      }, {
+        title: 'Let\'s talk about backlogs',
+        imageUrl: 'backlogs.gif',
+        imageSize: '384x288'
+      }, {
+        title: 'Give me compliments',
+        imageUrl: 'compliments.gif',
+        imageSize: '576x404'
+      }, {
+        title: 'Build Succeeded!',
+        imageUrl: 'horse.gif',
+        imageSize: '600x338'
       }
     ];
 
