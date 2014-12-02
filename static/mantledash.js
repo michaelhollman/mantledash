@@ -55,15 +55,15 @@ $(function() {
       }, {
         title: 'Let\'s talk about backlogs',
         imageUrl: 'backlogs.gif',
-        imageSize: '384x288'
+        imageSize: '400x300'
       }, {
         title: 'Give me compliments',
         imageUrl: 'compliments.gif',
-        imageSize: '576x404'
+        imageSize: '400x280'
       }, {
         title: 'Build Succeeded!',
         imageUrl: 'horse.gif',
-        imageSize: '600x338'
+        imageSize: '400x225'
       }
     ];
 
