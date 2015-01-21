@@ -1,6 +1,8 @@
 $(function() {
   "use strict";
 
+  var socket = io();
+
   function getRandomBranchName() {
     var branchNames = [
     'master',
