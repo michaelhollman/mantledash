@@ -20,6 +20,12 @@ app.get('/', function(request, response) {
 
 io.on('connection', function(socket){
     console.log('A user connected');
+    socket.on('alert', function(msg){
+      io.emit('alert', msg);
+    });
+    socket.on('chat', function(msg){
+      io.emit('chat', msg);
+    });
 });
 
 var server = app.listen(app.get('port'), function() {

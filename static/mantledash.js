@@ -101,4 +101,8 @@ $(function() {
   sweetAlertInitialize();
   displayRandomStatus();
 
+  socket.on('alert', function(msg){
+    sweetAlert({title: msg.text, imageUrl: msg.img, timer: 10000});
+  });
+
 });
