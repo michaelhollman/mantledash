@@ -1,7 +1,8 @@
+var socket;
 $(function() {
   "use strict";
 
-  var socket = io();
+  socket = io();
 
   function getRandomBranchName() {
     var branchNames = [
@@ -99,4 +100,5 @@ $(function() {
 
   sweetAlertInitialize();
   displayRandomStatus();
+
 });
