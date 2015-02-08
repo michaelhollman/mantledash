@@ -102,7 +102,23 @@ $(function() {
   displayRandomStatus();
 
   socket.on('alert', function(msg){
-    sweetAlert({title: msg.text, imageUrl: msg.img, timer: 10000});
+    sweetAlert({
+      title: msg.title,
+      text: msg.text,
+      type: msg.type,
+      timer: 10000,
+      allowOutsideClick: true
+    });
+  });
+
+  socket.on('gif', function(msg){
+    sweetAlert({
+      title: msg.text,
+      imageUrl: msg.img,
+      imageSize: msg.size,
+      timer: 10000,
+      allowOutsideClick: true
+    });
   });
 
 });

@@ -23,6 +23,9 @@ io.on('connection', function(socket){
     socket.on('alert', function(msg){
       io.emit('alert', msg);
     });
+    socket.on('gif', function(msg){
+      io.emit('gif', msg);
+    });
     socket.on('chat', function(msg){
       io.emit('chat', msg);
     });

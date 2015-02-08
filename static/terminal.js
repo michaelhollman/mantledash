@@ -16,8 +16,11 @@ $(function() {
 
   var user = "i4o";
   commands= {
-    "alert": function(img, text) {
-      socket.emit('alert', {img: img, text: text});
+    "alert": function(title, text, type) {
+      socket.emit('alert', {title: title, text: text, type: type});
+    },
+    "gif": function(img, text, size) {
+      socket.emit('gif', {img: img, text: text, size: size});
     },
     "chat": function(a){
       socket.emit('chat', user + "> " + a);
@@ -27,7 +30,8 @@ $(function() {
       t.set_prompt(user + "> ");
     },
     "help": function() {
-      t.echo("alert http://url.com/path/to/img.gif \"My subtitle\"");
+      t.echo("alert \"My Title\" \"My text\" [warning|error|success|info]");
+      t.echo("gif http://url.com/path/to/img.gif \"My subtitle\" 300x500");
       t.echo("chat \"My chat message\"");
       t.echo("user username");
     }
