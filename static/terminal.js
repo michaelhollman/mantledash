@@ -14,7 +14,7 @@ var greetings = "   *                           (                   \n\
 $(function() {
   var t;
 
-  var user = "i4o";
+  var user = "md";
   commands= {
     "alert": function(title, text, type) {
       socket.emit('alert', {title: title, text: text, type: type});
