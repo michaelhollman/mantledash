@@ -42,7 +42,7 @@ $(function() {
     greetings: greetings,
     name: 'MantleDash_Terminal',
     height: 150,
-    prompt: "i4o> "
+    prompt: "md> "
   });
   // Hide terminal by default
   $('#terminal').toggle();
