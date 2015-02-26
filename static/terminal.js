@@ -15,7 +15,7 @@ $(function() {
   var t;
 
   var user = "md";
-  commands= {
+  var commands= {
     "alert": function(title, text, type) {
       socket.emit('alert', {title: title, text: text, type: type});
     },
@@ -29,11 +29,15 @@ $(function() {
       user = a;
       t.set_prompt(user + "> ");
     },
+    "userlist": function(){
+      socket.emit('userList', {});
+    },
     "help": function() {
       t.echo("alert \"My Title\" \"My text\" [warning|error|success|info]");
       t.echo("gif http://url.com/path/to/img.gif \"My subtitle\" 300x500");
       t.echo("chat \"My chat message\"");
       t.echo("user username");
+      t.echo("userlist");
     }
   };
 
@@ -51,10 +55,20 @@ $(function() {
     if(e.which === 27) {
       $('#terminal').toggle();
     }
-  })
+  });
 
   socket.on('chat', function(msg) {
     t.echo("[[;teal;]" + msg + "]");
+  });
+  socket.on('userList', function(msg) {
+    var styleBegin = "[[;yellow;]";
+    var styleEnd = "]";
+    t.echo(styleBegin + "User List:" + styleEnd);
+    t.echo(styleBegin + "UUID                 | Name" + styleEnd);
+    t.echo(styleBegin + "---------------------|-----" + styleEnd);
+    for (var key in msg) {
+      t.echo(styleBegin + key + " | " + msg[key] );
+    }
   });
 
 });

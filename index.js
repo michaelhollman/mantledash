@@ -18,8 +18,11 @@ app.get('/', function(request, response) {
   });
 });
 
+var connectedUsers = {};
 io.on('connection', function(socket){
     console.log('A user connected');
+    var socketId = socket.id;
+    connectedUsers[socketId] = "md";
     socket.on('alert', function(msg){
       io.emit('alert', msg);
     });
@@ -28,6 +31,15 @@ io.on('connection', function(socket){
     });
     socket.on('chat', function(msg){
       io.emit('chat', msg);
+    });
+    socket.on('userList', function(msg){
+      socket.emit('userList', connectedUsers);
+    });
+    socket.on('disconnect', function() {
+      if(socketId in connectedUsers) {
+        delete connectedUsers[socketId];
+      }
+      console.log("A user disconnected.");
     });
 });
 
