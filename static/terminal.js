@@ -27,6 +27,7 @@ $(function() {
     },
     "user": function(a){
       user = a;
+      socket.emit('user', {"name": a});
       t.set_prompt(user + "> ");
     },
     "userlist": function(){
@@ -57,6 +58,9 @@ $(function() {
     }
   });
 
+  socket.on('server', function(msg) {
+    t.echo("[[;yellow;]" + msg + "]");
+  });
   socket.on('chat', function(msg) {
     t.echo("[[;teal;]" + msg + "]");
   });

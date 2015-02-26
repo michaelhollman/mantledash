@@ -23,6 +23,7 @@ io.on('connection', function(socket){
     console.log('A user connected');
     var socketId = socket.id;
     connectedUsers[socketId] = "md";
+    io.emit('server', "New user connected with UUID \"" + socketId + "\".");
     socket.on('alert', function(msg){
       io.emit('alert', msg);
     });
@@ -32,11 +33,20 @@ io.on('connection', function(socket){
     socket.on('chat', function(msg){
       io.emit('chat', msg);
     });
+    socket.on('user', function(msg){
+      var oldName = "md";
+      if(socketId in connectedUsers) {
+        oldName = connectedUsers[socketId];
+      }
+      connectedUsers[socketId] = msg['name'];
+      io.emit('server', "\"" + oldName + "\" changed name to \"" + msg['name'] + "\" at UUID \"" + socketId + "\".");
+    });
     socket.on('userList', function(msg){
       socket.emit('userList', connectedUsers);
     });
     socket.on('disconnect', function() {
       if(socketId in connectedUsers) {
+        io.emit('server', "User \"" + connectedUsers[socketId] + "\" disconnected with UUID \"" + socketId + "\".");
         delete connectedUsers[socketId];
       }
       console.log("A user disconnected.");
