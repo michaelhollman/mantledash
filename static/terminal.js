@@ -59,10 +59,10 @@ $(function() {
   });
 
   socket.on('server', function(msg) {
-    t.echo("[[;yellow;]" + msg + "]");
+    t.echo("[[;yellow;](" + (new Date()).toJSON().slice(11,16) + ") " + msg + "]");
   });
   socket.on('chat', function(msg) {
-    t.echo("[[;teal;]" + msg + "]");
+    t.echo("[[;teal;](" + (new Date()).toJSON().slice(11,16) + ") " + msg + "]");
   });
   socket.on('userList', function(msg) {
     var styleBegin = "[[;yellow;]";
