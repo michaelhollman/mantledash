@@ -30,7 +30,7 @@ $(function() {
       socket.emit('user', {"name": a});
       t.set_prompt(user + "> ");
     },
-    "userlist": function(){
+    "who": function(){
       socket.emit('userList', {});
     },
     "help": function() {
@@ -38,7 +38,7 @@ $(function() {
       t.echo("gif http://url.com/path/to/img.gif \"My subtitle\" 300x500");
       t.echo("chat \"My chat message\"");
       t.echo("user username");
-      t.echo("userlist");
+      t.echo("who");
     }
   };
 
