@@ -18,8 +18,12 @@ app.get('/', function(request, response) {
   });
 });
 
+var connectedUsers = {};
 io.on('connection', function(socket){
     console.log('A user connected');
+    var socketId = socket.id;
+    connectedUsers[socketId] = "md";
+    io.emit('server', "New user connected (" + socketId + ").");
     socket.on('alert', function(msg){
       io.emit('alert', msg);
     });
@@ -28,6 +32,24 @@ io.on('connection', function(socket){
     });
     socket.on('chat', function(msg){
       io.emit('chat', msg);
+    });
+    socket.on('user', function(msg){
+      var oldName = "md";
+      if(socketId in connectedUsers) {
+        oldName = connectedUsers[socketId];
+      }
+      connectedUsers[socketId] = msg['name'];
+      io.emit('server', "\"" + oldName + "\" (" + socketId + ") changed name to \"" + msg['name'] + "\".");
+    });
+    socket.on('userList', function(msg){
+      socket.emit('userList', connectedUsers);
+    });
+    socket.on('disconnect', function() {
+      if(socketId in connectedUsers) {
+        io.emit('server', "User \"" + connectedUsers[socketId] + "\" (" + socketId + ") disconnected.");
+        delete connectedUsers[socketId];
+      }
+      console.log("A user disconnected.");
     });
 });
 
