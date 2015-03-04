@@ -24,6 +24,7 @@ $(function() {
     },
     "chat": function(a){
       socket.emit('chat', user + "> " + a);
+        mantlebot.respond(a);
     },
     "user": function(a){
       user = a;
