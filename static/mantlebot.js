@@ -18,7 +18,7 @@ $(function(){
             var match = text.match(word);
             if(match !== null) {
                 flag = flag || (text !== null);
-                text = text.replace(match, 'playdoh');
+                text = text.replace(new RegExp(match, 'g'), 'playdoh');
             }
         });
 
