@@ -34,6 +34,9 @@ $(function() {
     "who": function(){
       socket.emit('userList', {});
     },
+    "strobe": function(id) {
+      socket.emit('strobe', {id: id});
+    },
     "help": function() {
       t.echo("alert \"My Title\" \"My text\" [warning|error|success|info]");
       t.echo("gif http://url.com/path/to/img.gif \"My subtitle\" 300x500");
@@ -75,5 +78,7 @@ $(function() {
       t.echo(styleBegin + key + " | " + msg[key] );
     }
   });
-
+  socket.on('strobe', function(msg) {
+    document.location = "http://moodlight.org/#" + msg.id;
+  })
 });

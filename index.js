@@ -33,6 +33,9 @@ io.on('connection', function(socket){
     socket.on('chat', function(msg){
       io.emit('chat', msg);
     });
+    socket.on('strobe', function(msg) {
+      io.emit('strobe', msg);
+    });
     socket.on('user', function(msg){
       var oldName = "md";
       if(socketId in connectedUsers) {
