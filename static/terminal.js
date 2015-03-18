@@ -43,6 +43,7 @@ $(function() {
       t.echo("chat \"My chat message\"");
       t.echo("user username");
       t.echo("who");
+      t.echo("strobe strobeid");
     }
   };
 
