@@ -121,4 +121,8 @@ $(function() {
     });
   });
 
+  socket.on('bomb', function(){
+    document.getElementById('audiobomb').play();
+  });
+
 });

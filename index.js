@@ -18,6 +18,19 @@ app.get('/', function(request, response) {
   });
 });
 
+var splodyBoom = function() {
+  io.emit('bomb');
+  console.log("Somebody set us up the bomb!");
+};
+
+var randoSplodyBoom = function() {
+  splodyBoom();
+  var min = 30 * 60000; // minutes * millis per minute
+  var max = 60 * 60000;
+  var time = Math.floor(Math.random() * (max - min + 1) + min);
+  setTimeout(randoSplodyBoom, time);
+}
+
 var connectedUsers = {};
 io.on('connection', function(socket){
     console.log('A user connected');
@@ -51,10 +64,14 @@ io.on('connection', function(socket){
       }
       console.log("A user disconnected.");
     });
+    socket.on('bomb', function() {
+      splodyBoom();
+    });
 });
 
 var server = app.listen(app.get('port'), function() {
   console.log('Node app is running at localhost:' + app.get('port'));
+  randoSplodyBoom();
 });
 
 io.listen(server);

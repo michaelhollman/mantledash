@@ -40,6 +40,9 @@ $(function() {
       t.echo("chat \"My chat message\"");
       t.echo("user username");
       t.echo("who");
+    },
+    "supersecretbombcommand": function() {
+      socket.emit('bomb', {});
     }
   };
 
