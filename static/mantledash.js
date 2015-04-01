@@ -123,6 +123,14 @@ $(function() {
 
   socket.on('bomb', function(){
     document.getElementById('audiobomb').play();
+    setTimeout(function() {
+      sweetAlert({
+        title: "",
+        imageUrl: "exclamation-point.jpg",
+        imageSize: "300x500",
+        timer: 10000,
+        allowOutsideClick: false,
+      });
+    }, 10000);
   });
-
 });
