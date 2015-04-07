@@ -43,7 +43,10 @@ $(function() {
     },
     "supersecretbombcommand": function() {
       socket.emit('bomb', {});
-    }
+    },
+    "supersecretreloadcommand": function() {
+      socket.emit('reload', {});
+    },
   };
 
   // Initialize terminal
