@@ -133,4 +133,8 @@ $(function() {
       });
     }, 10000);
   });
+
+  socket.on('reload', function(){
+    location.reload();
+  })
 });

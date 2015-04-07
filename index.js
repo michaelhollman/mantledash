@@ -25,8 +25,8 @@ var splodyBoom = function() {
 
 var randoSplodyBoom = function() {
   splodyBoom();
-  var min = 30 * 60000; // minutes * millis per minute
-  var max = 60 * 60000;
+  var min = 7 * 60000; // minutes * millis per minute
+  var max = 20 * 60000;
   var time = Math.floor(Math.random() * (max - min + 1) + min);
   setTimeout(randoSplodyBoom, time);
 }
@@ -66,6 +66,10 @@ io.on('connection', function(socket){
     });
     socket.on('bomb', function() {
       splodyBoom();
+    });
+    socket.on('reload', function() {
+      io.emit('reload');
+      console.log("Triggering client reload");
     });
 });
 
