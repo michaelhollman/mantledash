@@ -18,6 +18,8 @@ app.get('/', function(request, response) {
   });
 });
 
+var lastSplodyBoom = new Date();
+
 var splodyBoom = function() {
   io.emit('bomb');
   console.log("Somebody set us up the bomb!");
@@ -25,6 +27,7 @@ var splodyBoom = function() {
 
 var randoSplodyBoom = function() {
   splodyBoom();
+  lastSplodyBoom = new Date();
   var min = 7 * 60000; // minutes * millis per minute
   var max = 20 * 60000;
   var time = Math.floor(Math.random() * (max - min + 1) + min);
@@ -71,6 +74,13 @@ io.on('connection', function(socket){
       io.emit('reload');
       console.log("Triggering client reload");
     });
+    socket.on('timeSinceLastBomb', function() {
+      var diff = (new Date()) - lastSplodyBoom;
+      var hours = Math.floor(diff/(1000 * 60 * 60));
+      var minutes = Math.floor(diff/(1000 * 60)) - (hours * 60);
+      var seconds = Math.floor(diff/(1000)) - (minutes * 60) - (hours * 3600);
+      socket.emit('timeSinceLastBomb', String(hours) + ":" + String(minutes) + ":" + String(seconds) + " since last bomb.");
+    })
 });
 
 var server = app.listen(app.get('port'), function() {
