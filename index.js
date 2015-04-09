@@ -25,6 +25,11 @@ var splodyBoom = function() {
   console.log("Somebody set us up the bomb!");
 };
 
+var leedleBoom = function() {
+  io.emit('leedle');
+  console.log("THIS IS PATRICK!");
+};
+
 var randoSplodyBoom = function() {
   splodyBoom();
   lastSplodyBoom = new Date();
@@ -32,6 +37,14 @@ var randoSplodyBoom = function() {
   var max = 20 * 60000;
   var time = Math.floor(Math.random() * (max - min + 1) + min);
   setTimeout(randoSplodyBoom, time);
+}
+
+var randoLeedleBoom = function() {
+  leedleBoom();
+  var min = 7 * 60000; // minutes * millis per minute
+  var max = 20 * 60000;
+  var time = Math.floor(Math.random() * (max - min + 1) + min);
+  setTimeout(randoLeedleBoom, time);
 }
 
 var connectedUsers = {};
@@ -70,6 +83,9 @@ io.on('connection', function(socket){
     socket.on('bomb', function() {
       splodyBoom();
     });
+    socket.on('leedle', function() {
+      leedleBoom();
+    });
     socket.on('reload', function() {
       io.emit('reload');
       console.log("Triggering client reload");
@@ -86,6 +102,7 @@ io.on('connection', function(socket){
 var server = app.listen(app.get('port'), function() {
   console.log('Node app is running at localhost:' + app.get('port'));
   randoSplodyBoom();
+  randoLeedleBoom();
 });
 
 io.listen(server);
