@@ -102,6 +102,7 @@ io.on('connection', function(socket){
 var server = app.listen(app.get('port'), function() {
   console.log('Node app is running at localhost:' + app.get('port'));
   randoSplodyBoom();
+  randoLeedleBoom();
 });
 
 io.listen(server);

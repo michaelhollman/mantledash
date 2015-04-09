@@ -43,7 +43,7 @@ $(function() {
       t.echo("who");
     },
     "supersecretbombcommand": function() {
-      socket.emit('bomb', {});
+      socket.emit('leedle', {});
     },
     "supersecretreloadcommand": function() {
       socket.emit('reload', {});
