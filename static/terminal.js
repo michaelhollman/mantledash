@@ -41,9 +41,19 @@ $(function() {
       t.echo("alert \"My Title\" \"My text\" [warning|error|success|info]");
       t.echo("gif http://url.com/path/to/img.gif \"My subtitle\" 300x500");
       t.echo("chat \"My chat message\"");
+      t.echo("lastbomb");
       t.echo("user username");
       t.echo("who");
       t.echo("strobe strobeid");
+    },
+    "supersecretbombcommand": function() {
+      socket.emit('leedle', {});
+    },
+    "supersecretreloadcommand": function() {
+      socket.emit('reload', {});
+    },
+    "lastbomb": function() {
+      socket.emit('timeSinceLastBomb', {});
     }
   };
 
@@ -82,4 +92,9 @@ $(function() {
   socket.on('strobe', function(msg) {
     document.location = "http://moodlight.org/#" + msg.id;
   })
+  socket.on('timeSinceLastBomb', function(msg) {
+    var styleBegin = "[[;yellow;]";
+    var styleEnd = "]";
+    t.echo(styleBegin + msg + styleEnd);
+  });
 });

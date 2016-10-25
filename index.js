@@ -18,6 +18,35 @@ app.get('/', function(request, response) {
   });
 });
 
+var lastSplodyBoom = new Date();
+
+var splodyBoom = function() {
+  io.emit('bomb');
+  console.log("Somebody set us up the bomb!");
+};
+
+var leedleBoom = function() {
+  io.emit('leedle');
+  console.log("THIS IS PATRICK!");
+};
+
+var randoSplodyBoom = function() {
+  splodyBoom();
+  lastSplodyBoom = new Date();
+  var min = 7 * 60000; // minutes * millis per minute
+  var max = 20 * 60000;
+  var time = Math.floor(Math.random() * (max - min + 1) + min);
+  setTimeout(randoSplodyBoom, time);
+}
+
+var randoLeedleBoom = function() {
+  leedleBoom();
+  var min = 7 * 60000; // minutes * millis per minute
+  var max = 20 * 60000;
+  var time = Math.floor(Math.random() * (max - min + 1) + min);
+  setTimeout(randoLeedleBoom, time);
+}
+
 var connectedUsers = {};
 io.on('connection', function(socket){
     console.log('A user connected');
@@ -54,10 +83,29 @@ io.on('connection', function(socket){
       }
       console.log("A user disconnected.");
     });
+    socket.on('bomb', function() {
+      splodyBoom();
+    });
+    socket.on('leedle', function() {
+      leedleBoom();
+    });
+    socket.on('reload', function() {
+      io.emit('reload');
+      console.log("Triggering client reload");
+    });
+    socket.on('timeSinceLastBomb', function() {
+      var diff = (new Date()) - lastSplodyBoom;
+      var hours = Math.floor(diff/(1000 * 60 * 60));
+      var minutes = Math.floor(diff/(1000 * 60)) - (hours * 60);
+      var seconds = Math.floor(diff/(1000)) - (minutes * 60) - (hours * 3600);
+      socket.emit('timeSinceLastBomb', String(hours) + ":" + String(minutes) + ":" + String(seconds) + " since last bomb.");
+    })
 });
 
 var server = app.listen(app.get('port'), function() {
   console.log('Node app is running at localhost:' + app.get('port'));
+  randoSplodyBoom();
+  randoLeedleBoom();
 });
 
 io.listen(server);
